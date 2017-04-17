@@ -1,23 +1,7 @@
 package com.xiaoleilu.hutool.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.Stack;
-import java.util.TreeSet;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.xiaoleilu.hutool.convert.Convert;
@@ -277,7 +261,7 @@ public final class CollectionUtil {
 	 */
 	@SafeVarargs
 	public static <T> List<T> sortPageAll(int pageNo, int numPerPage, Comparator<T> comparator, Collection<T>... colls) {
-		final List<T> result = new ArrayList<T>();
+		final List<T> result = new ArrayList<>();
 		for (Collection<T> coll : colls) {
 			result.addAll(coll);
 		}
@@ -335,7 +319,7 @@ public final class CollectionUtil {
 	 * @return 排序后的Set
 	 */
 	public static List<Entry<Long, Long>> sortEntrySetToList(Set<Entry<Long, Long>> set) {
-		List<Entry<Long, Long>> list = new LinkedList<Map.Entry<Long, Long>>(set);
+		List<Entry<Long, Long>> list = new LinkedList<>(set);
 		Collections.sort(list, new Comparator<Entry<Long, Long>>(){
 
 			@Override
@@ -447,10 +431,8 @@ public final class CollectionUtil {
 	 */
 	@SafeVarargs
 	public static <T> HashSet<T> newHashSet(T... ts) {
-		HashSet<T> set = new HashSet<T>(Math.max((int) (ts.length/.75f) + 1, 16));
-		for (T t : ts) {
-			set.add(t);
-		}
+		HashSet<T> set = new HashSet<>(Math.max((int) (ts.length / .75f) + 1, 16));
+		set.addAll(Arrays.asList(ts));
 		return set;
 	}
 	
@@ -465,9 +447,7 @@ public final class CollectionUtil {
 	public static <T> HashSet<T> newHashSet(boolean isSorted, T... ts) {
 		int initialCapacity = Math.max((int) (ts.length/.75f) + 1, 16);
 		HashSet<T> set = isSorted ? new LinkedHashSet<T>(initialCapacity) : new HashSet<T>(initialCapacity);
-		for (T t : ts) {
-			set.add(t);
-		}
+		set.addAll(Arrays.asList(ts));
 		return set;
 	}
 
@@ -498,9 +478,7 @@ public final class CollectionUtil {
 	@SafeVarargs
 	public static <T> ArrayList<T> newArrayList(T... values) {
 		ArrayList<T> arrayList = new ArrayList<T>(values.length);
-		for (T t : values) {
-			arrayList.add(t);
-		}
+		arrayList.addAll(Arrays.asList(values));
 		return arrayList;
 	}
 
@@ -710,7 +688,7 @@ public final class CollectionUtil {
 	 * @return 是否为空
 	 */
 	public static boolean isEmpty(Iterator<?> Iterator) {
-		return null == Iterator || false == Iterator.hasNext();
+		return null == Iterator || !Iterator.hasNext();
 	}
 	
 	/**
@@ -720,7 +698,7 @@ public final class CollectionUtil {
 	 * @return 是否为空
 	 */
 	public static boolean isEmpty(Enumeration<?> enumeration) {
-		return null == enumeration || false == enumeration.hasMoreElements();
+		return null == enumeration || !enumeration.hasMoreElements();
 	}
 
 	// ---------------------------------------------------------------------- isNotEmpty
@@ -733,7 +711,7 @@ public final class CollectionUtil {
 	 * @return 是否为非空
 	 */
 	public static boolean isNotEmpty(Collection<?> collection) {
-		return false == isEmpty(collection);
+		return !isEmpty(collection);
 	}
 
 	/**
@@ -743,7 +721,7 @@ public final class CollectionUtil {
 	 * @return 是否为非空
 	 */
 	public static <T> boolean isNotEmpty(Map<?, ?> map) {
-		return false == isEmpty(map);
+		return !isEmpty(map);
 	}
 
 	/**
@@ -829,11 +807,11 @@ public final class CollectionUtil {
 			return null;
 		}
 
-		final List<T> keyList = new ArrayList<T>(keys);
-		final List<K> valueList = new ArrayList<K>(values);
+		final List<T> keyList = new ArrayList<>(keys);
+		final List<K> valueList = new ArrayList<>(values);
 
 		final int size = Math.min(keys.size(), values.size());
-		final Map<T, K> map = new HashMap<T, K>((int) (size / 0.75));
+		final Map<T, K> map = new HashMap<>((int) (size / 0.75));
 		for (int i = 0; i < size; i++) {
 			map.put(keyList.get(i), valueList.get(i));
 		}
@@ -864,9 +842,7 @@ public final class CollectionUtil {
 	 */
 	public static <T> TreeSet<T> toTreeSet(Collection<T> collection, Comparator<T> comparator) {
 		final TreeSet<T> treeSet = new TreeSet<T>(comparator);
-		for (T t : collection) {
-			treeSet.add(t);
-		}
+		treeSet.addAll(collection);
 		return treeSet;
 	}
 
@@ -878,7 +854,7 @@ public final class CollectionUtil {
 	 * @return treeSet
 	 */
 	public static <T> List<T> sort(Collection<T> collection, Comparator<T> comparator) {
-		List<T> list = new ArrayList<T>(collection);
+		List<T> list = new ArrayList<>(collection);
 		Collections.sort(list, comparator);
 		return list;
 	}
@@ -977,7 +953,7 @@ public final class CollectionUtil {
 	 */
 	public static <T> List<T> addAllIfNotContains(List<T> list, List<T> otherList){
 		for (T t : otherList) {
-			if(false == list.contains(t)){
+			if(!list.contains(t)){
 				list.add(t);
 			}
 		}

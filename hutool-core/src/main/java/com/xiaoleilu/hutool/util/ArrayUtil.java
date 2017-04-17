@@ -497,7 +497,7 @@ public final class ArrayUtil {
 		for (T t : array) {
 			if (t == value) {
 				return true;
-			} else if (false == isPrimitive && null != value && value.equals(t)) {
+			} else if (!isPrimitive && null != value && value.equals(t)) {
 				return true;
 			}
 		}
@@ -515,7 +515,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		Integer[] array = new Integer[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = Integer.valueOf(values[i]);
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -530,7 +530,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		int[] array = new int[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = values[i].intValue();
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -545,7 +545,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		Long[] array = new Long[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = Long.valueOf(values[i]);
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -560,7 +560,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		long[] array = new long[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = values[i].longValue();
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -575,7 +575,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		Character[] array = new Character[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = Character.valueOf(values[i]);
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -590,7 +590,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		char[] array = new char[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = values[i].charValue();
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -605,7 +605,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		Byte[] array = new Byte[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = Byte.valueOf(values[i]);
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -620,7 +620,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		byte[] array = new byte[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = values[i].byteValue();
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -635,7 +635,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		Short[] array = new Short[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = Short.valueOf(values[i]);
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -650,7 +650,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		short[] array = new short[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = values[i].shortValue();
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -665,7 +665,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		Float[] array = new Float[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = Float.valueOf(values[i]);
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -680,7 +680,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		float[] array = new float[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = values[i].floatValue();
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -695,7 +695,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		Double[] array = new Double[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = Double.valueOf(values[i]);
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -710,7 +710,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		double[] array = new double[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = values[i].doubleValue();
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -725,7 +725,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		Boolean[] array = new Boolean[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = Boolean.valueOf(values[i]);
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -740,7 +740,7 @@ public final class ArrayUtil {
 		final int length = values.length;
 		boolean[] array = new boolean[length];
 		for (int i = 0; i < length; i++) {
-			array[i] = values[i].booleanValue();
+			array[i] = values[i];
 		}
 		return array;
 	}
@@ -1117,7 +1117,7 @@ public final class ArrayUtil {
 	 * @since 3.0.1
 	 */
 	public static byte[] toArray(ByteBuffer bytebuffer) {
-		if (false == bytebuffer.hasArray()) {
+		if (!bytebuffer.hasArray()) {
 			int oldPosition = bytebuffer.position();
 			bytebuffer.position(0);
 			int size = bytebuffer.limit();
